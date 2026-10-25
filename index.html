@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0f766e">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="中日翻譯">
+<title>中文 ⇄ 日文 雙向翻譯</title>
+<style>
+:root{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang TC","Microsoft JhengHei",sans-serif;color:#172033;background:#f5f7fb}*{box-sizing:border-box}body{margin:0;background:linear-gradient(180deg,#e8fffb,#f5f7fb 30%);min-height:100vh}.wrap{max-width:980px;margin:auto;padding:16px 12px 36px}header{text-align:center;padding:10px 0 18px}h1{font-size:clamp(28px,6vw,42px);margin:10px 0 5px}.badge{display:inline-block;background:#fff;border:1px solid #cceee8;border-radius:999px;padding:8px 13px;color:#0f766e;font-weight:800}.sub{color:#667085;font-size:14px;margin:4px 0 14px}.toolbar{display:flex;gap:10px;justify-content:space-between;align-items:center;background:#fff;border:1px solid #e4e7ec;border-radius:16px;padding:12px 14px;margin-bottom:14px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.card{background:#fff;border-radius:22px;padding:18px;box-shadow:0 12px 30px #10182814}.card h2{display:flex;justify-content:space-between;gap:10px;margin:0 0 3px;font-size:21px}label{display:block;font-size:14px;font-weight:800;margin:12px 0 7px}textarea{width:100%;min-height:135px;border:1.5px solid #e4e7ec;border-radius:16px;padding:14px;font-size:18px;line-height:1.5;resize:vertical;outline:none;background:#fcfcfd}textarea:focus{border-color:#2dd4bf;box-shadow:0 0 0 4px #2dd4bf1f}textarea[readonly]{background:#f8fafc}.row{display:flex;gap:9px;flex-wrap:wrap;margin-top:10px}button{border:0;border-radius:14px;padding:12px 14px;font-size:15px;font-weight:800;cursor:pointer}.primary{background:#0f766e;color:#fff;flex:1;min-width:150px}.soft{background:#eefaf8;color:#0f766e;border:1px solid #cceee8}.ghost{background:#f2f4f7;color:#344054}.mic{min-width:54px;font-size:20px}.mic.listening{background:#fee4e2;color:#b42318}.status{min-height:22px;margin-top:10px;font-size:13px;color:#667085}.status.ok{color:#067647}.status.err{color:#b42318}.info{margin-top:16px;background:#fffdf4;border:1px solid #f5df9e;border-radius:18px;padding:14px 16px;font-size:13px;line-height:1.6;color:#5f4b19}footer{text-align:center;color:#98a2b3;font-size:12px;margin-top:16px}@media(max-width:760px){.grid{grid-template-columns:1fr}.card{padding:15px;border-radius:18px}.toolbar{align-items:flex-start;flex-direction:column}textarea{min-height:120px;font-size:17px}}
+</style>
+</head>
+<body>
+<main class="wrap">
+<header><div class="badge">🇹🇼 中文 ⇄ 日本語 🇯🇵</div><h1>中日雙向語音翻譯</h1><div class="sub">打字或說話 → 自動翻譯 → 用對方語言朗讀</div></header>
+<div class="toolbar"><label style="margin:0"><input id="autoSpeak" type="checkbox" checked> 翻譯完成後自動朗讀</label><button id="stopSpeak" class="ghost">🔇 停止朗讀</button></div>
+<section class="grid">
+<article class="card">
+<h2><span>User A：中文 → 日文</span><span>🇹🇼→🇯🇵</span></h2><div class="sub">可輸入繁體中文，或使用台灣國語語音輸入。</div>
+<label for="zhInput">中文內容</label><textarea id="zhInput" lang="zh-TW" placeholder="例如：請問車站怎麼走？"></textarea>
+<div class="row"><button id="zhMic" class="soft mic">🎤</button><button id="zhTranslate" class="primary">翻譯成日文</button><button id="zhClear" class="ghost">清除</button></div>
+<label for="jaOutput">日文翻譯</label><textarea id="jaOutput" lang="ja-JP" readonly placeholder="翻譯結果會顯示在這裡"></textarea>
+<div class="row"><button id="jaSpeak" class="soft">🔊 日語朗讀</button><button id="jaCopy" class="ghost">📋 複製</button></div><div id="zhStatus" class="status"></div>
+</article>
+<article class="card">
+<h2><span>User B：日文 → 中文</span><span>🇯🇵→🇹🇼</span></h2><div class="sub">可輸入日文，或使用日語語音輸入。</div>
+<label for="jaInput">日文內容</label><textarea id="jaInput" lang="ja-JP" placeholder="例：駅へはどうやって行きますか？"></textarea>
+<div class="row"><button id="jaMic" class="soft mic">🎤</button><button id="jaTranslate" class="primary">翻譯成中文</button><button id="jaClear" class="ghost">清除</button></div>
+<label for="zhOutput">中文翻譯</label><textarea id="zhOutput" lang="zh-TW" readonly placeholder="翻譯結果會顯示在這裡"></textarea>
+<div class="row"><button id="zhSpeak" class="soft">🔊 台灣國語朗讀</button><button id="zhCopy" class="ghost">📋 複製</button></div><div id="jaStatus" class="status"></div>
+</article></section>
+<div class="info"><b>手機使用：</b>請從 HTTPS 網址開啟。第一次使用麥克風時請允許權限。若 Safari 不支援網頁內語音辨識，可點文字框後使用 iPhone 鍵盤的「聽寫」麥克風。</div>
+<footer>中日雙向翻譯工具｜翻譯：MyMemory｜朗讀：裝置內建語音</footer>
+</main>
+<script>
+(()=>{'use strict';const $=id=>document.getElementById(id),auto=$('autoSpeak');let recNow=null;const status=(id,m,t='')=>{let e=$(id);e.textContent=m;e.className='status'+(t?' '+t:'')};
+function split(t,max=450){t=t.trim();if(!t)return[];let out=[],buf='';for(const c of t){let n=new TextEncoder().encode(buf+c).length;if(n>max&&buf){out.push(buf);buf=c}else buf+=c;if('。！？!?\n'.includes(c)&&buf){out.push(buf);buf=''}}if(buf)out.push(buf);return out}
+async function tr(text,from,to){let chunks=split(text),r=[];if(!chunks.length)throw Error('請先輸入要翻譯的內容');for(const c of chunks){let u='https://api.mymemory.translated.net/get?q='+encodeURIComponent(c)+'&langpair='+encodeURIComponent(from+'|'+to),res=await fetch(u);if(!res.ok)throw Error('翻譯服務目前無法連線');let d=await res.json(),x=d?.responseData?.translatedText;if(!x)throw Error('沒有取得翻譯結果');r.push(x)}return r.join('')}
+function voice(lang){let vs=speechSynthesis.getVoices(),l=lang.toLowerCase(),b=l.split('-')[0];return vs.find(v=>v.lang.toLowerCase()===l)||vs.find(v=>v.lang.toLowerCase().startsWith(b))||null}
+function speak(text,lang){if(!text.trim())return;if(!('speechSynthesis'in window)){alert('這個瀏覽器不支援語音朗讀');return}speechSynthesis.cancel();let u=new SpeechSynthesisUtterance(text);u.lang=lang;u.rate=.95;let v=voice(lang);if(v)u.voice=v;speechSynthesis.speak(u)}
+async function copy(text,id){if(!text.trim())return;try{await navigator.clipboard.writeText(text);status(id,'已複製到剪貼簿','ok')}catch{status(id,'複製失敗','err')}}
+async function run(o){let input=$(o.i).value.trim();if(!input){status(o.s,'請先輸入內容','err');$(o.i).focus();return}let old=o.b.textContent;o.b.disabled=true;o.b.textContent='翻譯中…';status(o.s,'正在翻譯…');try{let x=await tr(input,o.f,o.t);$(o.o).value=x;status(o.s,'翻譯完成','ok');if(auto.checked)speak(x,o.l)}catch(e){status(o.s,e.message||'翻譯失敗','err')}finally{o.b.disabled=false;o.b.textContent=old}}
+function listen(o){const SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR){status(o.s,'此瀏覽器不支援網頁語音辨識，請使用手機鍵盤的麥克風聽寫。','err');$(o.i).focus();return}if(recNow){try{recNow.stop()}catch{}}let r=new SR();recNow=r;r.lang=o.l;r.interimResults=true;r.continuous=false;let m=$(o.m),base=$(o.i).value.trim(),fin='';m.classList.add('listening');m.textContent='⏹️';status(o.s,o.l==='zh-TW'?'正在聽台灣國語…':'日本語を聞いています…');r.onresult=e=>{let inter='';for(let i=e.resultIndex;i<e.results.length;i++){let x=e.results[i][0].transcript;if(e.results[i].isFinal)fin+=x;else inter+=x}$(o.i).value=[base,fin+inter].filter(Boolean).join(base?' ':'')};r.onerror=e=>status(o.s,e.error==='not-allowed'?'麥克風權限未開啟，請允許瀏覽器使用麥克風。':'語音辨識失敗：'+e.error,'err');r.onend=()=>{m.classList.remove('listening');m.textContent='🎤';recNow=null;if($(o.i).value.trim()){status(o.s,'語音輸入完成','ok');o.done()}};try{r.start()}catch{status(o.s,'無法啟動語音辨識','err')}}
+$('zhTranslate').onclick=()=>run({i:'zhInput',o:'jaOutput',f:'zh-TW',t:'ja',s:'zhStatus',l:'ja-JP',b:$('zhTranslate')});$('jaTranslate').onclick=()=>run({i:'jaInput',o:'zhOutput',f:'ja',t:'zh-TW',s:'jaStatus',l:'zh-TW',b:$('jaTranslate')});$('zhMic').onclick=()=>listen({l:'zh-TW',i:'zhInput',m:'zhMic',s:'zhStatus',done:()=>$('zhTranslate').click()});$('jaMic').onclick=()=>listen({l:'ja-JP',i:'jaInput',m:'jaMic',s:'jaStatus',done:()=>$('jaTranslate').click()});$('jaSpeak').onclick=()=>speak($('jaOutput').value,'ja-JP');$('zhSpeak').onclick=()=>speak($('zhOutput').value,'zh-TW');$('stopSpeak').onclick=()=>speechSynthesis.cancel();$('jaCopy').onclick=()=>copy($('jaOutput').value,'zhStatus');$('zhCopy').onclick=()=>copy($('zhOutput').value,'jaStatus');$('zhClear').onclick=()=>{$('zhInput').value='';$('jaOutput').value='';status('zhStatus','')};$('jaClear').onclick=()=>{$('jaInput').value='';$('zhOutput').value='';status('jaStatus','')};if('speechSynthesis'in window){speechSynthesis.getVoices();speechSynthesis.onvoiceschanged=()=>speechSynthesis.getVoices()}})();
+</script>
+</body></html>
